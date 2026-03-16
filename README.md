@@ -35,7 +35,7 @@ The dataset comes from [Oracle's Elixir](https://oracleselixir.com/) and contain
 ### Data Cleaning
 
 1. Selected only columns relevant to our snowball analysis from the original 165-column dataset.
-2. Converted `playoffs`, `firstblood`, `firstdragon`, `firstherald`, `firsttower`, and `firstbaron` to boolean types since they represent binary events.
+2. Converted `firstblood`, `firstdragon`, `firstherald`, `firsttower`, and `firstbaron` to boolean types since they represent binary events.
 3. Converted `gamelength` from seconds to minutes for interpretability.
 4. Filtered to only `position == 'team'` rows since we care about team-level performance, not individual player stats.
 5. Dropped rows missing `golddiffat15`, `csdiffat15`, or `xpdiffat15` since games that ended before 15 minutes cannot be used to study the snowball effect at that timestamp.
@@ -172,6 +172,10 @@ Winning teams tend to have positive gold differentials at 15 minutes, while losi
 <iframe src="assets/winrate-by-goldbucket.html" width="100%" height="400" frameborder="0"></iframe>
 
 Win rate increases sharply with gold differential at 15 minutes. Teams with large gold leads (5000+) win nearly every game, while teams far behind almost never recover. The steep curve confirms that early gold advantages snowball heavily into wins.
+
+<iframe src="assets/side-winrate.html" width="100%" height="400" frameborder="0"></iframe>
+
+Blue side holds a slight win rate advantage over Red side, consistent with the known structural advantage from draft order and map asymmetry. This motivated the fairness analysis at the end of the project to check whether our model performs differently across sides.
 
 ### Interesting Aggregates
 
