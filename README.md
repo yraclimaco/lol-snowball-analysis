@@ -1,8 +1,12 @@
 # How Punishing is the Snowball Effect in Professional League of Legends?
 
-This project was for the UCSD DSC80 course.
+Name: Yra Climaco
+
+This is a comprehensive data science project completed through the UCSD DSC80 course.
 
 ## Introduction
+
+In League of Legends, two teams of five compete to destroy each other's base. Each match progresses through distinct phases: the early game (first 15 minutes) focuses on farming gold, securing kills, and taking objectives like dragons and heralds. Teams that build advantages in these areas can "snowball," using their lead to gain even more resources, making it increasingly difficult for the losing team to catch up.
 
 This project investigates how punishing the snowball effect is in 2025 professional League of Legends. Specifically: **do early game leads such as in gold, kills, and objectives reliably predict which team wins the match?**
 
@@ -188,7 +192,7 @@ However, in the original `lol_df` (before filtering for relevant columns), the `
 
 ### Missingness Dependency
 
-We tested whether the missingness of `golddiffat25` depends on other columns using permutation tests.
+I tested whether the missingness of `golddiffat25` depends on other columns using permutation tests.
 
 **Test 1: Missingness depends on `firstbaron`**
 
@@ -198,7 +202,7 @@ Games missing `golddiffat25` ended before 25 minutes, likely before baron even s
 
 **Test 2: Missingness does not depend on `firstdragon`**
 
-First dragon spawns early (~5 minutes) and should not predict whether the game lasts to 25 minutes. The permutation test yielded a p-value of approximately 0.791, so we fail to reject the null. The missingness of `golddiffat25` does not depend on `firstdragon`.
+First dragon spawns early (~5 minutes) and should not predict whether the game lasts to 25 minutes. The permutation test yielded a p-value of approximately 0.791, so we fail to reject the null. The missingness of `golddiffat25` likely does not depend on `firstdragon`.
 
 <iframe src="assets/missingness-dragon.html" width="100%" height="400" frameborder="0"></iframe>
 
@@ -215,7 +219,7 @@ Our EDA showed a strong visual relationship between early gold leads and winning
 **Significance Level:** α = 0.05
 
 **Conclusion:**
-The observed difference in win rate was approximately 0.458. After 1,000 permutations, the p-value was approximately 0.0. Since this is well below our significance level, we reject the null hypothesis. The data suggests that teams with a positive gold differential at 15 minutes tend to win at a significantly higher rate. This is further evidence that the snowball effect is real in professional play.
+The observed difference in win rate was approximately 0.458. After 1,000 permutations, the p-value was approximately 0.0. Since this is well below our significance level, so we reject the null hypothesis. The data suggests that teams with a positive gold differential at 15 minutes tend to win at a significantly higher rate. This is further evidence that the snowball effect is real in professional play.
 
 <iframe src="assets/hypothesis-test.html" width="100%" height="400" frameborder="0"></iframe>
 
@@ -267,6 +271,8 @@ To improve on the baseline, we switched to a **Random Forest Classifier** and en
 | Final (Random Forest) | 0.7556 | 0.7364 |
 
 The final model improves test accuracy by about 0.8 percentage points. The modest `max_depth` of 5 prevents overfitting while still capturing nonlinear thresholds in the snowball effect such as the difference between a recoverable 1k gold lead and a decisive 3k lead. The small gap between train and test accuracy confirms the model generalizes well.
+
+<iframe src="assets/confusion-matrix.html" width="100%" height="400" frameborder="0"></iframe>
 
 ## Fairness Analysis
 
